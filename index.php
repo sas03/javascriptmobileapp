@@ -13,13 +13,13 @@
     <meta name="theme-color" content="#009578">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="images/logo192.png">
+    <link rel="apple-touch-icon" href="images/WGFavicon.png">
 </head>
 <body>
     <canvas id="canvas1"></canvas>
-    <img id="playerImage" src="player.png">
-    <img id="backgroundImage" src="background_single.png">
-    <img id="enemyImage" src="enemy_1.png">
+    <img id="playerImage" src="images/player.png">
+    <img id="backgroundImage" src="images/background_single.png">
+    <img id="enemyImage" src="images/enemy_1.png">
     <button id="fullScreenButton">Toggle fullscreen</button>
 
     <script src="script.js"></script>

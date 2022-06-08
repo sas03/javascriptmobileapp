@@ -4,7 +4,7 @@ self.addEventListener("install", event => {
         //promise
         caches.open("static").then(cache => {
             // add elements in the array(cache)
-            return cache.addAll(["./", "./images/logo192.png"]);
+            return cache.addAll(["./", "./images/WGFavicon.png"]);
         })
     );
 });
