@@ -12,9 +12,14 @@ window.addEventListener('load', function(){
     canvas.height = 720;
     let enemies = [];
     let score = 0;
-    let gameOver = false;
+    let gameOver = true;
     const fullScreenButton = document.getElementById('fullScreenButton');
 
+    const startButton = document.getElementById('startButton');
+
+    let audio = new Audio();
+    audio.src = 'spell.wav';
+    
     // apply eventlisteners to keyboard events and hold an array of all currently active keys
     class InputHandler{
         constructor(){
@@ -300,7 +305,7 @@ window.addEventListener('load', function(){
     function handleEnemies(deltaTime){
         if (enemyTimer > enemyInterval + randomEnemyInterval){
             // push instance of Enemy class in enemies array, and pass canvas' width and height from it's constructor
-            enemies.push(new Enemy(canvas.width, (Math.random() * canvas.height) + 100))
+            enemies.push(new Enemy(canvas.width, (Math.random() * canvas.height) + 50))
             //console.log(enemies);
             randomEnemyInterval = Math.random() * 1000 + 500;
             enemyTimer = 0;
@@ -329,6 +334,7 @@ window.addEventListener('load', function(){
             context.fillText('GAME OVER, press Enter or swipe down to restart!', canvas.width / 2, 200);
             context.fillStyle = 'white';
             context.fillText('GAME OVER, press Enter or swipe down to restart!', canvas.width / 2 + 2, 202);
+            startButton.style.visibility = 'visible';
         }
     }
 
@@ -338,6 +344,7 @@ window.addEventListener('load', function(){
         player.restart();
         //restart background to it's initial position
         background.restart();
+        audio.play();
         enemies = [];
         score = 0;
         gameOver = false;
@@ -367,9 +374,13 @@ window.addEventListener('load', function(){
     let enemyInterval = 1000;
     // random number between 500 and 1500 milisecond
     let randomEnemyInterval = Math.random() * 1000 + 500;
-    
+
+    background.draw(ctx);
+    player.draw(ctx);
+    displayStatusText(ctx);
     // function for the main animation loop, runs 60times per second, updating and drawing our game over and over
     function animate(timeStamp){
+        startButton.style.visibility = 'hidden';
         // deltaTime = how many miliseconds our computer need to serve one animation frame(60frames per second = 60miliseconds)
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
@@ -389,6 +400,10 @@ window.addEventListener('load', function(){
         if (!gameOver) requestAnimationFrame(animate);
     }
 
-    animate(0);
+    startButton.addEventListener('click', function(){
+        if(gameOver == true){
+            restartGame();
+        }
+    })
 });
 

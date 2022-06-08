@@ -32,3 +32,19 @@ body{
     left: 50%;
     transform: translateX(-50%);
 }
+
+#startButton{
+    position: absolute;
+    font-size: 20px;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 10vh;
+    width: 20vw;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+    background-color: rgb(41, 107, 85);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 20px;
+}

@@ -21,6 +21,7 @@
     <img id="backgroundImage" src="background_single.png">
     <img id="enemyImage" src="obstacle.png">
     <button id="fullScreenButton">Toggle fullscreen</button>
+    <button id="startButton">Start</button>
 
     <script src="script.js"></script>
     <script src="src/index.js"></script>
