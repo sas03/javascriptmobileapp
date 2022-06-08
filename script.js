@@ -259,7 +259,7 @@ window.addEventListener('load', function(){
             this.fps = 20;
             this.frameTimer = 0;
             this.frameInterval = 1000 / this.fps;
-            this.speed = 8;
+            this.speed = 30;
             this.markedForDeletion = false;
         }
         draw(context){
@@ -300,7 +300,7 @@ window.addEventListener('load', function(){
     function handleEnemies(deltaTime){
         if (enemyTimer > enemyInterval + randomEnemyInterval){
             // push instance of Enemy class in enemies array, and pass canvas' width and height from it's constructor
-            enemies.push(new Enemy(canvas.width, canvas.height))
+            enemies.push(new Enemy(canvas.width, (Math.random() * canvas.height) + 100))
             //console.log(enemies);
             randomEnemyInterval = Math.random() * 1000 + 500;
             enemyTimer = 0;
