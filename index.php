@@ -17,9 +17,9 @@
 </head>
 <body>
     <canvas id="canvas1"></canvas>
-    <img id="playerImage" src="images/player.png">
-    <img id="backgroundImage" src="images/background_single.png">
-    <img id="enemyImage" src="images/enemy_1.png">
+    <img id="playerImage" src="player.png">
+    <img id="backgroundImage" src="background_single.png">
+    <img id="enemyImage" src="enemy_1.png">
     <button id="fullScreenButton">Toggle fullscreen</button>
 
     <script src="script.js"></script>
