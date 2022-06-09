@@ -443,8 +443,10 @@ window.addEventListener('load', function(){
         audio.pause() 
     }
     window.onfocus = function() { 
-        window_focus = true; 
-        audio.play() 
+        window_focus = true;
+        if(!gameOver){            
+            audio.play(); 
+        } 
     }
 });
 
