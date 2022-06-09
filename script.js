@@ -19,6 +19,11 @@ window.addEventListener('load', function(){
 
     let audio = new Audio();
     audio.src = 'spell.wav';
+    audio.volume = 0.2;
+
+    let audio1 = new Audio();
+    audio1.src = 'explodemini.wav';
+    audio1.volume = 0.2;
     
     // apply eventlisteners to keyboard events and hold an array of all currently active keys
     class InputHandler{
@@ -331,9 +336,9 @@ window.addEventListener('load', function(){
         if(gameOver){
             context.textAlign = 'center';
             context.fillStyle = 'black';
-            context.fillText('GAME OVER, press Enter or swipe down to restart!', canvas.width / 2, 200);
+            context.fillText('YOU GOT CORONA, press Enter or swipe down to restart!', canvas.width / 2, 200);
             context.fillStyle = 'white';
-            context.fillText('GAME OVER, press Enter or swipe down to restart!', canvas.width / 2 + 2, 202);
+            context.fillText('YOU GOT CORONA, press Enter or swipe down to restart!', canvas.width / 2 + 2, 202);
             startButton.style.visibility = 'visible';
         }
     }
@@ -344,6 +349,18 @@ window.addEventListener('load', function(){
         player.restart();
         //restart background to it's initial position
         background.restart();
+        //audio loop when game is running
+        if (typeof audio.loop == 'boolean')
+        {
+            audio.loop = true;
+        }
+        else
+        {
+            audio.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+        }
         audio.play();
         enemies = [];
         score = 0;
@@ -377,7 +394,12 @@ window.addEventListener('load', function(){
 
     background.draw(ctx);
     player.draw(ctx);
-    displayStatusText(ctx);
+    ctx.font = '40px Helvetica';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'black';
+    ctx.fillText('CORONA ATTACK, press Enter or swipe down to start!', canvas.width / 2, 200);
+    ctx.fillStyle = 'white';
+    ctx.fillText('CORONA ATTACK, press Enter or swipe down to start!', canvas.width / 2 + 2, 202);
     // function for the main animation loop, runs 60times per second, updating and drawing our game over and over
     function animate(timeStamp){
         startButton.style.visibility = 'hidden';
@@ -397,7 +419,12 @@ window.addEventListener('load', function(){
         handleEnemies(deltaTime);
         displayStatusText(ctx);
         // to create endless animation loop
-        if (!gameOver) requestAnimationFrame(animate);
+        if (!gameOver) requestAnimationFrame(animate)
+        else if(gameOver) {
+            audio.pause();
+            audio.currentTime = 0;
+            audio1.play();
+        }
     }
 
     startButton.addEventListener('click', function(){
@@ -405,5 +432,23 @@ window.addEventListener('load', function(){
             restartGame();
         }
     })
+    
+    /*window.onblur = function(){
+        audio.pause();
+    }*/
+    var window_focus = true;
+
+    window.onblur = function() { 
+        window_focus = false; 
+        audio.pause() 
+    }
+    window.onfocus = function() { 
+        window_focus = true; 
+        audio.play() 
+    }
 });
 
+// A ajouter
+// Changer le background, voire personnages
+// Stopper le son, si on sort de l'application / site
+// Ajouter un bouton de pause(pour le jeu et le son)
